@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:weight_tracker/core/presenter/user_notifier.dart';
 import 'package:weight_tracker/modules/auth/data/create_user_collection_repository.dart';
 import 'package:weight_tracker/modules/auth/data/sign_in_anonymously_repository.dart';
@@ -40,6 +41,7 @@ class AuthPresenter extends ChangeNotifier {
       }, (_) {
         state = AuthState.Sucess;
         notifyListeners();
+        Modular.to.pushReplacementNamed('/home');
         // Navegar para home
       });
     });

@@ -7,9 +7,10 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) => FutureBuilder(
         future: Firebase.initializeApp(),
         builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text('Restart the app');
+          if (snapshot.connectionState == ConnectionState.done) {
+            Modular.to.pushReplacementNamed('/auth');
           }
+
           return GestureDetector(
             onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
             child: MaterialApp(
