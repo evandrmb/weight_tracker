@@ -4,11 +4,13 @@ import 'weight.dart';
 
 class WeightRegister {
   final Weight weight;
+  final DateTime weightDate;
   final DateTime createdAt;
   final DateTime updatedAt;
 
   WeightRegister(
     this.weight,
+    this.weightDate,
     this.createdAt,
     this.updatedAt,
   );
@@ -20,6 +22,7 @@ class WeightRegister {
   }) {
     return WeightRegister(
       weight ?? this.weight,
+      weightDate ?? weightDate,
       createdAt ?? this.createdAt,
       updatedAt ?? this.updatedAt,
     );
@@ -27,7 +30,8 @@ class WeightRegister {
 
   Map<String, dynamic> toMap() {
     return {
-      'weight': weight?.toMap(),
+      'weight': weight.value,
+      'weightDate': weightDate.millisecondsSinceEpoch,
       'created_at': createdAt?.millisecondsSinceEpoch,
       'updated_at': updatedAt?.millisecondsSinceEpoch,
     };
@@ -38,8 +42,9 @@ class WeightRegister {
 
     return WeightRegister(
       Weight.fromMap(map['weight']),
-      DateTime.fromMillisecondsSinceEpoch(map['createdAt']),
-      DateTime.fromMillisecondsSinceEpoch(map['updatedAt']),
+      DateTime.fromMillisecondsSinceEpoch(map['weightDate']),
+      DateTime.fromMillisecondsSinceEpoch(map['created_at']),
+      DateTime.fromMillisecondsSinceEpoch(map['updated_at']),
     );
   }
 

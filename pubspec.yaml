@@ -21,6 +21,8 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  intl:
+  charts_flutter: ^0.9.0
   dartz:
   flutter_modular:
   firebase_auth: ^0.18.0+1

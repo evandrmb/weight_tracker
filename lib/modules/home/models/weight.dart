@@ -1,34 +1,24 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart';
 
 class Weight {
-  final double weight;
-  Weight({
-    this.weight,
-  });
+  final double value;
 
-  Weight._(this.weight);
-
-  Weight copyWith({
-    double weight,
-  }) {
-    return Weight(
-      weight: weight ?? this.weight,
-    );
-  }
+  Weight._({@required this.value});
 
   Map<String, dynamic> toMap() {
     return {
-      'weight': weight,
+      'weight': value,
     };
   }
 
   factory Weight.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
-    return Weight(
-      weight: map['weight'],
+    return Weight._(
+      value: map['weight'],
     );
   }
 
@@ -37,18 +27,18 @@ class Weight {
   factory Weight.fromJson(String source) => Weight.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Weight(weight: $weight)';
+  String toString() => 'Weight(weight: $value)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Weight && o.weight == weight;
+    return o is Weight && o.value == value;
   }
 
   @override
-  int get hashCode => weight.hashCode;
+  int get hashCode => value.hashCode;
 }
 
 Option<Weight> createWeight(double value) =>
-    value > 600 ? None() : Some(Weight._(value));
+    value > 600 ? None() : Some(Weight._(value: value));
