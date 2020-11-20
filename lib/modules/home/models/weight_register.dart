@@ -39,9 +39,12 @@ class WeightRegister {
 
   factory WeightRegister.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
+    Weight weight;
+
+    createWeight(map['weight']).fold(() => null, (w) => weight = w);
 
     return WeightRegister(
-      Weight.fromMap(map['weight']),
+      weight,
       DateTime.fromMillisecondsSinceEpoch(map['weightDate']),
       DateTime.fromMillisecondsSinceEpoch(map['created_at']),
       DateTime.fromMillisecondsSinceEpoch(map['updated_at']),

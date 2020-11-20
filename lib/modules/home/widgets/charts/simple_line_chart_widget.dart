@@ -2,14 +2,14 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:weight_tracker/modules/home/models/weight_register.dart';
 
-class SimpleLineCharWidget extends StatelessWidget {
+class SimpleLineChartWidget extends StatelessWidget {
   final List<charts.Series> seriesList;
   final bool animate;
 
-  SimpleLineCharWidget(this.seriesList, {this.animate});
+  SimpleLineChartWidget(this.seriesList, {this.animate});
 
-  factory SimpleLineCharWidget.withWeights(List<WeightRegister> list) {
-    return SimpleLineCharWidget(
+  factory SimpleLineChartWidget.withWeights(List<WeightRegister> list) {
+    return SimpleLineChartWidget(
       _weightsSeries(list),
       animate: true,
     );
@@ -17,11 +17,10 @@ class SimpleLineCharWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return charts.TimeSeriesChart(
-      seriesList,
-      animate: animate,
-      dateTimeFactory: const charts.LocalDateTimeFactory(),
-    );
+    return charts.TimeSeriesChart(seriesList,
+        animate: animate,
+        dateTimeFactory: const charts.LocalDateTimeFactory(),
+        defaultRenderer: charts.LineRendererConfig(includePoints: true));
   }
 
   static List<charts.Series<WeightRegister, DateTime>> _weightsSeries(

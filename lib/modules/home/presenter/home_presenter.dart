@@ -16,7 +16,8 @@ class HomePresenter extends ChangeNotifier {
   bool get isHomeSucess => HomeState.Sucess == state;
   bool get isHomeError => HomeState.Error == state;
 
-  double get currentWeight => registers.last.weight.value;
+  double get currentWeight =>
+      registers.isNotEmpty ? registers.last.weight.value : 0.00;
 
   final RegisterWeightRepository _registerWeightRepository;
   final FetchWeightsRepository _fetchWeightsRepository;
@@ -24,6 +25,8 @@ class HomePresenter extends ChangeNotifier {
   HomePresenter(this._registerWeightRepository, this._fetchWeightsRepository) {
     fetchWeights();
   }
+
+  Future<void> reloadWeights() => Future.value(() => fetchWeights());
 
   void fetchWeights() async {
     emit(HomeState.Loading);
